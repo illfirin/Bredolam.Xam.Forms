@@ -1,0 +1,20 @@
+﻿<Properties StartupItem="NavDrawer.Forms.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.fufff" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="MenuPage.cs">
+    <Files>
+      <File FileName="MainActivity.cs" Line="1" Column="1" />
+      <File FileName="MenuCell.cs" Line="9" Column="11" />
+      <File FileName="MenuPage.cs" Line="19" Column="12" />
+      <File FileName="..\..\..\..\Program Files (x86)\MSBuild\Xamarin\Android\Xamarin.Android.Common.targets" Line="1" Column="1" />
+      <File FileName="ParseStorageImpl.cs" Line="1" Column="1" />
+      <File FileName="packages.config" Line="1" Column="1" />
+      <File FileName="ItemManager.cs" Line="1" Column="1" />
+      <File FileName="MainPage.cs" Line="127" Column="15" />
+      <File FileName="Resources\Colors.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
