@@ -12,6 +12,9 @@ namespace NavDrawer.Forms
 		private NavigationPage home;
 		private NavigationPage addNew;
 		private NavigationPage profile;
+        private NavigationPage Favorites;
+        private NavigationPage Settings;
+        private NavigationPage Exit;
 
 		/*public enum MenuOption
 		{
@@ -22,13 +25,13 @@ namespace NavDrawer.Forms
 			Settings,
 			Exit
 		} */
-		public MenuPage ()
+		public MenuPage (MasterDetailPage masterDetail)
 		{
 			Items = new ObservableCollection<MenuItem> ();
 			Items.Add (new MenuItem{ Title = "На главную", Option = MenuOption.Home });
-			Items.Add (new MenuItem{ Title = "Добавить новую", Option = MenuOption.Friends });
+			Items.Add (new MenuItem{ Title = "Добавить новую", Option = MenuOption.Add_new });
 			Items.Add (new MenuItem{ Title = "Профиль", Option = MenuOption.Profile });
-			master = masterDetail;
+            master = masterDetail;
 
 			Title = "menu";
 			Icon = "ic_drawer_dark.png";
@@ -55,58 +58,46 @@ namespace NavDrawer.Forms
 			Content = listView;
 		}
 
-		public void Selected (MenuOption item)
-		{
-			master.IsPresented = false; // close the slide-out
+        public void Selected(MenuOption item)
+        {
+            master.IsPresented = false; // close the slide-out
 
-			switch (item) {
-			case MenuOption.Home:
-				master.Detail = home ??
-					(home = new NavigationPage(
-						new ContentPage 
-						{ 
-							Title = "Home",
-							Content = new Label { Text = "Home", Font = Font.SystemFontOfSize (40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center } 
-						})
-					);
-				break;
-			case MenuOption.Friends:
-				master.Detail = friends ??
-					(friends = new NavigationPage(
-						new ContentPage 
-						{ 
-							Title = "Friends",
-							Content = new Label { Text = "Friends", Font = Font.SystemFontOfSize (40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center } 
-						})
-					);
-				break;
-			case MenuOption.Profile:
-				master.Detail = profile ??
-					(profile = new NavigationPage(
-						new ContentPage 
-						{ 
-							Title = "Profile",
-							Content = new Label { Text = "Profile", Font = Font.SystemFontOfSize (40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center } 
-						})
-					);
-				break;*/
-			Button button = new Button {
-				Text = "Test",
-				HorizontalOptions = LayoutOptions.Center,
-				VerticalOptions = LayoutOptions.Center
+            switch (item)
+            {
+                case MenuOption.Home:
+                    master.Detail = home ??
+                    (home = new NavigationPage(
+                        new ContentPage
+                        {
+                            Title = "Home",
+                            Content = new Label { Text = "Home", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
+                        })
+                    );
+                    break;
+                case MenuOption.Profile:
+                    master.Detail = profile ??
+                    (profile = new NavigationPage(
+                        new ContentPage
+                        {
+                            Title = "Profile",
+                            Content = new Label { Text = "Profile", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
+                        })
+                    );
+                    break;
+                case MenuOption.Add_new:
+                    master.Detail = addNew ??
+                    (addNew = new NavigationPage(
+                        new ContentPage
+                        {
+                            Title = "Add New",
+                            Content = new Label { Text = "Add new", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
+                        })
+                    );
+                    break;
 
-			};
 
-			button.Clicked += async delegate {
-				var testObject = new ParseObject("Test");
-				testObject["foo"] = "bar";
-				await testObject.SaveAsync();
-			};
-			this.Content =
-			{
-				
-			}
-		}
+            }
+        }
 	
 
 	}
