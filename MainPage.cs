@@ -3,7 +3,7 @@ using System;
 using NavDrawer.Forms;
 using Android;
 using Xamarin.Forms;
-
+using System.Net.WebClient;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Parse;
@@ -11,6 +11,7 @@ using Android.App;
 
 namespace NavDrawer.Forms
 {
+   
 	public class MainPage: ContentPage
 	{
 		public MainPage ()
@@ -55,21 +56,26 @@ namespace NavDrawer.Forms
 				Font.SystemFontOfSize(25),
 				Font.SystemFontOfSize(40))
 		};
-		public EnterPage()
+		public EnterPage() 
+        {
 		{
+            Entry user = new Entry { Placeholder = "Username" };
+			Entry pass = new Entry { Placeholder = "Password" };
+
 			Button EntrButton = new Button {
 				Text = "Login",
 				BackgroundColor = Colors.GetColor(Colors.Therapy)
 			};
 			EntrButton.Clicked += async (sender,e) =>
 			{
-				if(user.Text != (null || "") || pass.Text != (null ||""))
+				if(String.IsNullOrEmpty(user.Text) != false ||  String.IsNullOrEmpty(pass.Text) != false)
 					{
-						ParseUser.SignUpAsync(user.Text, pass.Text);
+						//
+                        _label.Text = "Должны быть заполнены оба поля";
 					}
-				else if( user.Text != (null || "") || pass.Text != (null ||""))
+				else if(String.IsNullOrEmpty(user.Text) == false &  String.IsNullOrEmpty(pass.Text) == false)
 				{
-					_label.Text = "Должны быть заполнены оба поля";
+					ParseUser.SignUpAsync(user.Placeholder., pass.Text);
 				}
 				else
 				{
@@ -77,8 +83,7 @@ namespace NavDrawer.Forms
 				}
 
 			};
-			Entry user = new Entry { Placeholder = "Username" };
-			Entry pass = new Entry { Placeholder = "Password" };
+			
 			this.Content = new StackLayout
 			{
 				Spacing = 20, Padding = 50,
@@ -104,6 +109,7 @@ namespace NavDrawer.Forms
 				Text = "Registration",
 				BackgroundColor = Colors.GetColor (Colors.Esmeralda_eyes)
 			};
+        }
 
 			button.Clicked += async (sender, e) => 
 			{
@@ -115,7 +121,7 @@ namespace NavDrawer.Forms
 						Email = email.Text,
 						Password = pass.Text
 					};
-					await ParseUser.SignUpAsync(user.Username, user.Password);
+					await ParseUser.SignUpAsync();
 				}
 				catch(Exception ex)
 				{
@@ -124,9 +130,9 @@ namespace NavDrawer.Forms
 					builder.SetPositiveButton("OK", (s, e) => {});
 				}
 			};
-			async Task SignUpUserCommand ()
-			{ 
-				{ if (IsBusy) { return; }
+			async void SignUpUserCommand()
+			{
+			     if (IsBusy) { return; }
 					IsBusy = true;
 					try 
 					{
@@ -137,7 +143,7 @@ namespace NavDrawer.Forms
 							Password = pass.Text
 						};
 
-						var connected = CrossConnectivity.Current.IsConnected;
+						var connected = ;
 						if (connected) 
 						{ 
 							UserDialogs.Instance.ShowLoading ("Creating Account");
@@ -153,9 +159,27 @@ namespace NavDrawer.Forms
 						UserDialogs.Instance.ShowError(ex.Message, 3); Xamarin.Insights.Report (ex); }
 						IsBusy = false; 
 					} 
+            
+			
+        }
+        public static bool HasConnection()
+        {
+            try
+            {
+                using(var client = new System.Net.WebClient())
+                {
+                    using(var stream = client.OpenRead("http://www.google.com"))
+                    {
+                        return true;
+                    }
+                }
 
-				
-			}
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
 			Entry email = new Entry {Placeholder = "Эл.Почта"};
