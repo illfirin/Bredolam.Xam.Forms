@@ -7,7 +7,8 @@ using System.Net.WebClient;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Parse;
-using Android.App; 
+using Android.App;
+using System.Net; 
 
 namespace NavDrawer.Forms
 {
@@ -16,19 +17,23 @@ namespace NavDrawer.Forms
 	{
 		public MainPage ()
 		{
-			Button EnterButton = new Button {
+			Button EnterButton = new Button 
+            {
 				Text = "Вход",
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center,
 				BackgroundColor = Colors.GetColor (Colors.White)
 
 			};
-			Button RegistrationButton = new Button {
+
+			Button RegistrationButton = new Button 
+            {
 				Text = "Регистрация",
 				HorizontalOptions = LayoutOptions.Center,
 				VerticalOptions = LayoutOptions.Center,
 				BackgroundColor = Colors.GetColor (Colors.White)
 			};
+
 			EnterButton.Clicked += async(sender,  e) => 
 			{
 				var enPage = new EnterPage();
@@ -58,11 +63,12 @@ namespace NavDrawer.Forms
 		};
 		public EnterPage() 
         {
-		{
+		    
             Entry user = new Entry { Placeholder = "Username" };
 			Entry pass = new Entry { Placeholder = "Password" };
 
-			Button EntrButton = new Button {
+			Button EntrButton = new Button 
+            {
 				Text = "Login",
 				BackgroundColor = Colors.GetColor(Colors.Therapy)
 			};
@@ -75,7 +81,7 @@ namespace NavDrawer.Forms
 					}
 				else if(String.IsNullOrEmpty(user.Text) == false &  String.IsNullOrEmpty(pass.Text) == false)
 				{
-					ParseUser.SignUpAsync(user.Placeholder., pass.Text);
+					await ParseUser.LogInAsync(user.Text, pass.Text);
 				}
 				else
 				{
@@ -98,9 +104,10 @@ namespace NavDrawer.Forms
 					_label
 				}
 			};
-		}
-	}
-	public class RegistrationPage:ContentPage 
+		
+	    }
+    }
+	public class RegistrationPage: ContentPage 
 	{
 		public RegistrationPage()
 		{
@@ -109,7 +116,10 @@ namespace NavDrawer.Forms
 				Text = "Registration",
 				BackgroundColor = Colors.GetColor (Colors.Esmeralda_eyes)
 			};
-        }
+
+            Entry email = new Entry { Placeholder = "Эл.Почта" };
+            Entry userName = new Entry { Placeholder = "Логин" };
+            Entry pass = new Entry { Placeholder = "Пароль" };
 
 			button.Clicked += async (sender, e) => 
 			{
@@ -121,16 +131,24 @@ namespace NavDrawer.Forms
 						Email = email.Text,
 						Password = pass.Text
 					};
-					await ParseUser.SignUpAsync();
+					await user.SignUpAsync();
 				}
 				catch(Exception ex)
 				{
-					var builder = new AlertDialog.Builder(this);
-					builder.SetMessage(ex.ToString());
-					builder.SetPositiveButton("OK", (s, e) => {});
+                    var builder = new AlertDialog.Builder(Content.)
+                    
+                    .SetMessage(ex)
+                    .SetCancelable(false)
+                    .SetPositiveButton("ОК", (s, args) => { });
+
+                    var dialog = builder.Create();
+                    dialog.Show();
 				}
 			};
-			async void SignUpUserCommand()
+			
+                
+            }
+            async void SignUpUserCommand(string userName, string email, string pass)
 			{
 			     if (IsBusy) { return; }
 					IsBusy = true;
@@ -138,55 +156,58 @@ namespace NavDrawer.Forms
 					{
 						var user = new ParseUser()
 						{ 
-							Username = userName.Text,
-							Email = email.Text,
-							Password = pass.Text
+							Username = userName,
+							Email = email,
+							Password = pass
 						};
 
-						var connected = ;
+						var connected = RegistrationPage.HasConnection();
 						if (connected) 
 						{ 
-							UserDialogs.Instance.ShowLoading ("Creating Account");
+							
 							//The code that actually signs a user up! 
 							await user.SignUpAsync();
-							//More UI stuff.. 
-							UserDialogs.Instance.HideLoading ();
-							await NavigateToMainUI (); 
+							//More UI stuff..
+                            var fPage = new FirstPage();
+                            await Navigation.PushModalAsync(fPage); 
 						} 
-						else { UserDialogs.Instance.ShowError ("No Internet Connection"); } }
+						else 
+                        { 
+                           var builder = AlertDialog.Builder (Activity.); 
+                        } 
+                    }
 					catch (Exception ex) 
 					{ 
-						UserDialogs.Instance.ShowError(ex.Message, 3); Xamarin.Insights.Report (ex); }
+						UserDialogs.Instance.ShowError(ex.Message, 3);
 						IsBusy = false; 
-					} 
-            
-			
-        }
-        public static bool HasConnection()
-        {
-            try
-            {
-                using(var client = new System.Net.WebClient())
-                {
-                    using(var stream = client.OpenRead("http://www.google.com"))
-                    {
-                        return true;
-                    }
+					}
                 }
 
-            }
-            catch
-            {
-                return false;
-            }
-        }
+               public static bool HasConnection()
+                {
+                    try
+                       {
+                           using (var client = new WebClient())
+                            {
+                                using(var stream = client.OpenRead("http://www.google.com"))
+                                {
+                                    return true;
+                                }
+                            }
+
+                        }
+                    catch
+                        {
+                            return false;
+                        }
+                }
 
 
-			Entry email = new Entry {Placeholder = "Эл.Почта"};
-			Entry userName = new Entry{ Placeholder = "Логин"};
-			Entry pass = new Entry { Placeholder = "Пароль" };
-		}
-
-	}
+			
+    
+      }
+     
 }
+
+
 
