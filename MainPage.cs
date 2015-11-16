@@ -131,58 +131,89 @@ namespace NavDrawer.Forms
 						Email = email.Text,
 						Password = pass.Text
 					};
+                    Collection<Item> favorites = new Collection<Item>();
+                    user["Favorites"] = favorites;
 					await user.SignUpAsync();
 				}
 				catch(Exception ex)
 				{
-                    var builder = new AlertDialog.Builder(Content.)
+                    /* Navigation.PushAsync
+                           (new NavigationPage(new ContentPage
+                       { 
+                             Title = "Error",
+                            Content = new Label
+                        {
+                               Text = ex.Message,
+                               Font = Font.SystemFontOfSize(40),
+                               VerticalOptions = LayoutOptions.Center,
+                               HorizontalOptions = LayoutOptions.Center
+					    }
+                        })); */
+                    Console.Error.WriteLine(@"Error{0}", ex.Message);
+                    /*var builder = new AlertDialog.Builder(this)
                     
                     .SetMessage(ex)
                     .SetCancelable(false)
                     .SetPositiveButton("ОК", (s, args) => { });
 
                     var dialog = builder.Create();
-                    dialog.Show();
+                    dialog.Show();*/
 				}
 			};
 			
                 
             }
-            async void SignUpUserCommand(string userName, string email, string pass)
-			{
-			     if (IsBusy) { return; }
-					IsBusy = true;
-					try 
-					{
-						var user = new ParseUser()
-						{ 
-							Username = userName,
-							Email = email,
-							Password = pass
-						};
+        async void SignUpUserCommand(string userName, string email, string pass)
+        {
+            if (IsBusy) { return; }
+            IsBusy = true;
+            try
+            {
+                var user = new ParseUser()
+                {
+                    Username = userName,
+                    Email = email,
+                    Password = pass
+                };
 
-						var connected = RegistrationPage.HasConnection();
-						if (connected) 
-						{ 
-							
-							//The code that actually signs a user up! 
-							await user.SignUpAsync();
-							//More UI stuff..
-                            var fPage = new FirstPage();
-                            await Navigation.PushModalAsync(fPage); 
-						} 
-						else 
-                        { 
-                           var builder = AlertDialog.Builder (Activity.); 
-                        } 
-                    }
-					catch (Exception ex) 
-					{ 
-						UserDialogs.Instance.ShowError(ex.Message, 3);
-						IsBusy = false; 
-					}
+                var connected = RegistrationPage.HasConnection();
+                if (connected)
+                {
+
+                    await user.SignUpAsync();
+
+                    var fPage = new FirstPage();
+                    await Navigation.PushModalAsync(fPage);
                 }
+                else
+                {
+                    this.Content = new Label()
+                    {
+                        Text = "Нет подключения к интернету",
+                        Font = Font.SystemFontOfSize(40),
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center
 
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                /* Navigation.PushAsync
+                    (new NavigationPage(new ContentPage
+                {
+                    Title = "Error",
+                    Content = new Label
+                {
+                    Text = ex.Message,
+                    Font = Font.SystemFontOfSize(40),
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                }
+                })); */
+                Console.Error.WriteLine(@"Error{0}", ex.Message);
+            }
+        }
                public static bool HasConnection()
                 {
                     try
@@ -203,7 +234,15 @@ namespace NavDrawer.Forms
                 }
 
 
-			
+			/* case MenuOption.Add_new:
+                    master.Detail = addNew ??
+                    (addNew = new NavigationPage(
+                        new ContentPage
+                        {
+                            Title = "Add New",
+                            Content = new Label { Text = "Add new", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center } 
+                        }
+             */
     
       }
      

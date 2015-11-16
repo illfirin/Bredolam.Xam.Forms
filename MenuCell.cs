@@ -14,7 +14,7 @@ namespace NavDrawer.Forms
 	}
 	public class MenuItem
 	{
-		public ImageCell Title {get;set;}
+		public String Title {get;set;}
 		public MenuOption Option { get; set;}
 
 	}

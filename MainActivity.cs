@@ -12,13 +12,15 @@ namespace NavDrawer.Forms
 {
 	[Activity(Label = "NavDrawer", MainLauncher = true,
 		ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
-	    public class MainActivity : FormsApplicationActivity {
+    public class MainActivity : FormsApplicationActivity 
+    {
 
 		public static MainActivity Current { get; private set; }
 		public NavDrawer.Forms.ParseStorageImpl TaskMgr { get; set; }
 
 		public MainActivity(IntPtr handle, global::Android.Runtime.JniHandleOwnership transfer)
-				: base() {
+				: base() 
+            {
 				Current = this;
 			}
 
@@ -36,13 +38,13 @@ namespace NavDrawer.Forms
 	{
 		public Appl ()
 		{
-			/*var masterDetail = new MasterDetailPage ();
+			var masterDetail = new MasterDetailPage ();
 			var master = new MenuPage (masterDetail);
 
 			masterDetail.Master = master;
-			master.Selected (MenuOption.Home);*/
+			master.Selected (MenuOption.Home);
 
-			var menuPage = new MenuPage();
+
 		
 		}
 	}
