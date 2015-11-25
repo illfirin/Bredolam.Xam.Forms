@@ -46,7 +46,14 @@ namespace NavDrawer.Forms
 				var regPage = new RegistrationPage();
 				await Navigation.PushAsync(regPage);
 
-			};	
+			};
+	
+            this.Content = new StackLayout
+            {
+                VerticalOptions = LayoutOptions.Center,
+				BackgroundColor = Colors.GetColor(Colors.Wired),
+                Children = {EnterButton, RegistrationButton}
+            };
 
 		}
 	}

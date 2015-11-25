@@ -68,7 +68,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Favorites.cs" />
     <Compile Include="FirstPage.cs" />
+    <Compile Include="Home.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

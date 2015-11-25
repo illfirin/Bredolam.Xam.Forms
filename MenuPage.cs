@@ -16,21 +16,17 @@ namespace NavDrawer.Forms
         private NavigationPage Settings;
         private NavigationPage Exit;
 
-		/*public enum MenuOption
-		{
-			Home,
-			Profile,
-			Add_new,
-			Favorites,
-			Settings,
-			Exit
-		} */
+
 		public MenuPage (MasterDetailPage masterDetail)
 		{
 			Items = new ObservableCollection<MenuItem> ();
 			Items.Add (new MenuItem{ Title = "На главную", Option = MenuOption.Home });
 			Items.Add (new MenuItem{ Title = "Добавить новую", Option = MenuOption.Add_new });
 			Items.Add (new MenuItem{ Title = "Профиль", Option = MenuOption.Profile });
+            Items.Add(new MenuItem { Title = "Избранное", Option = MenuOption.Favorites });
+            Items.Add(new MenuItem { Title = "Настройки", Option = MenuOption.Settings });
+            Items.Add(new MenuItem { Title = "Выход", Option = MenuOption.Exit });
+
             master = masterDetail;
 
 			Title = "menu";
@@ -94,16 +90,32 @@ namespace NavDrawer.Forms
                         })
                     );
                     break;
+                case MenuOption.Favorites:
+                    master.Detail = Favorites ??
+                        (Favorites = new NavigationPage(
+                            new ContentPage
+                            {
+                                Title = "Favotites",
+                                Content = new Label { Text = "Favorites", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
+                            }));
+                    break;
+                case MenuOption.Exit:
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        var result = await this.DisplayAlert("Alert!", "Do you really want to exit?", "Yes", "No");
+                        if (result) Android.OS.Process.KillProcess(Android.OS.Process.MyPid());  
+                    });
+                    break;
+
+
 
 
             }
         }
-	
 
+        
 	}
-	public class Home:NavigationPage
-	{
-	}
+	
 
 }
 
