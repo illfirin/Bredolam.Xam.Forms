@@ -21,6 +21,7 @@ namespace NavDrawer.Forms
         public int rating { get; set; }
 
         public List<string> tags { get; set; }
+        public List<ParseUser> Added { get; set; }
     }
 
     public interface IParseStorage
@@ -52,7 +53,7 @@ namespace NavDrawer.Forms
             po["Rating"] = item.rating;
             po["Tags"] = item.tags;
             po["Content"] = item.Content;
-
+            po["Added"] = item.Added;
             return po;
         }
         Item FromParseObject(ParseObject po)
@@ -64,7 +65,7 @@ namespace NavDrawer.Forms
             i.Name = Convert.ToString(po["Name"]);
             i.tags = (List<string>)po["Tags"];
             i.Content = Convert.ToString(po["Content"]);
-
+            i.Added = (List<ParseUser>)po["Added"];
             return i;
         }
 
