@@ -68,6 +68,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CitateCell.cs" />
+    <Compile Include="CitatePage.cs" />
     <Compile Include="Favorites.cs" />
     <Compile Include="FirstPage.cs" />
     <Compile Include="Home.cs" />
