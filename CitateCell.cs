@@ -56,13 +56,19 @@ namespace NavDrawer.Forms
             rate.HorizontalOptions = LayoutOptions.End; 
             View = new StackLayout
             {
-               
+
+                BackgroundColor = Color.FromHex("#ECE5CE"),
                 Padding = new Thickness(0, 5),
                 Orientation = StackOrientation.Horizontal,
-
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                
                 Children =
                 {
-
+                    title,
+                    content,
+                    tags,
+                    rate,
+                    plus
                 }
             };
         }
