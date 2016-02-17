@@ -1,5 +1,6 @@
 ﻿using System;
-using Parse;
+using moback;
+using Quickblox.Sdk;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -21,7 +22,7 @@ namespace NavDrawer.Forms
         public int rating { get; set; }
 
         public List<string> tags { get; set; }
-        public List<ParseUser> Added { get; set; }
+        public List<> Added { get; set; }
     }
 
     public interface IParseStorage
@@ -31,22 +32,22 @@ namespace NavDrawer.Forms
         Task SaveItemAsync(Item item);
         Task DeleteItemAsync(Item item);
     }
-    public class ParseStorageImpl : IParseStorage
+    public class mobackStorageImpl : IParseStorage
     {
-        static ParseStorageImpl impl = new ParseStorageImpl();
-        public static ParseStorageImpl Default { get { return impl; } }
+        static mobackStorageImpl impl = new mobackStorageImpl();
+        public static mobackStorageImpl Default { get { return impl; } }
         public List<Item> Items { get; private set; }
-        protected ParseStorageImpl()
+        protected mobackStorageImpl()
         {
             Items = new List<Item>();
-            ParseClient.Initialize("OPoI08dUl7lehA2pjyHUmliYpLr6VpOxM2hKZaGu", "o5NPUXwwz148AJw8QN64m7rCiGLa4Kh19tOmmDZz");
+            var quickBloxClient = new QuickbloxClient(34572, "KG2EDJbme8Ah-Ux", "NtTtanOE5RY8jvA");
         }
 
-        ParseObject ToParseObject(Item item)
+        mobackObject TomobackObject(Item item)
         {
-            var po = new ParseObject("Citate");
+            var po = new mobackObject("Citate");
             if (item.Id != 0)
-                po.ObjectId = Convert.ToString(item.Id);
+                po.objectId = Convert.ToString(item.Id);
 
             po["Author"] = item.Author;
             po["Name"] = item.Name;
@@ -56,24 +57,25 @@ namespace NavDrawer.Forms
             po["Added"] = item.Added;
             return po;
         }
-        Item FromParseObject(ParseObject po)
+        Item FromParseObject(mobackObject po)
         {
             var i = new Item();
-            i.Id = Convert.ToInt32(po.ObjectId);
+            i.Id = Convert.ToInt32(po.objectId);
             i.rating = Convert.ToInt32(po["Rating"]);
             i.Author = Convert.ToString(po["Author"]);
             i.Name = Convert.ToString(po["Name"]);
             i.tags = (List<string>)po["Tags"];
             i.Content = Convert.ToString(po["Content"]);
-            i.Added = (List<ParseUser>)po["Added"];
+            i.Added = (List<mobackObject>)po["Added"];
             return i;
         }
 
         async public Task<List<Item>> RefreshDataAsync()
         {
-            var query = ParseObject.GetQuery("Citate").OrderBy("Name");
+           // var query = ParseObject.GetQuery("Citate").OrderBy("Name");
+            mobackObject[] obj = .GetObjectsWithQuery();
             var ie = await query.FindAsync();
-
+            
             var items = new List<Item>();
             foreach (var t in ie)
             {

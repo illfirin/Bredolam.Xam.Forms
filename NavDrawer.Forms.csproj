@@ -91,9 +91,6 @@
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>packages\Xamarin.Forms.1.5.0.6447\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
     </Reference>
-    <Reference Include="Parse">
-      <HintPath>..\..\..\..\Users\Максим\OneDrive\Parse-1.6.0\Parse.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CitateCell.cs" />
