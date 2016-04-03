@@ -1,4 +1,4 @@
-﻿
+﻿using moback;
 using System;
 using NavDrawer.Forms;
 using Android;
@@ -6,9 +6,11 @@ using Xamarin.Forms;
 using System.Net.WebClient;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Parse;
+using Quickblox.Sdk;
 using Android.App;
-using System.Net; 
+using System.Net;
+using Quickblox.Sdk.Modules;
+using Quickblox.Sdk.Modules.UsersModule.Requests; 
 
 namespace NavDrawer.Forms
 {
@@ -71,7 +73,7 @@ namespace NavDrawer.Forms
 		public EnterPage() 
         {
 		    
-            Entry user = new Entry { Placeholder = "Username" };
+            Entry user = new Entry { Placeholder = "E-mail" };
 			Entry pass = new Entry { Placeholder = "Password" };
 
 			Button EntrButton = new Button 
@@ -88,7 +90,19 @@ namespace NavDrawer.Forms
 					}
 				else if(String.IsNullOrEmpty(user.Text) == false &  String.IsNullOrEmpty(pass.Text) == false)
 				{
-					await ParseUser.LogInAsync(user.Text, pass.Text);
+                    mobackUser mu = new moback.mobackUser(ApplicationKeyId: "YTRkZDRjZTUtMDVhMi00NTZkLWFhMjUtMWRlNTc1YzFlYmIx", 
+                                                                DevelopmentKey: "YTVlZDE3NWQtZGZmMS00MmE2LWJiODMtYTIxOTZlMTViZjA2", baseurl: "https://api.moback.com");
+                    appUSer muser = new appUSer();
+                    muser.email = user.Text;
+                    muser.password = pass.Text;
+                    try
+                    {
+                        var sessionToken = mu.Login(muser);
+                    }
+					catch(Exception ex)
+                    {
+                        Console.Error.WriteLine(@"Error{0}", ex.Message);
+                    }
 				}
 				else
 				{
@@ -132,12 +146,8 @@ namespace NavDrawer.Forms
 			{
 				try
 				{
-					var user = new ParseUser
-					{
-						Username = userName.Text,
-						Email = email.Text,
-						Password = pass.Text
-					};
+                    mobackUser mu = new mobackUser(ApplicationKeyId: "YTRkZDRjZTUtMDVhMi00NTZkLWFhMjUtMWRlNTc1YzFlYmIx", DevelopmentKey: "YTVlZDE3NWQtZGZmMS00MmE2LWJiODMtYTIxOTZlMTViZjA2", baseurl: "https://api.moback.com");
+					
                     Collection<Item> favorites = new Collection<Item>();
                     user["Favorites"] = favorites;
 					await user.SignUpAsync();
@@ -176,19 +186,23 @@ namespace NavDrawer.Forms
             IsBusy = true;
             try
             {
-                var user = new ParseUser()
+                var userSignUpRequest = new UserSignUpRequest
                 {
-                    Username = userName,
-                    Email = email,
-                    Password = pass
+                    User = new UserRequest()
+                    {
+                        FullName = userName,
+                        Email = email,
+                        Password = pass
+                    }
                 };
 
                 var connected = RegistrationPage.HasConnection();
                 if (connected)
                 {
-
-                    await user.SignUpAsync();
-
+                    var quickBloxClient = new QuickbloxClient(34572, "KG2EDJbme8Ah-Ux", "NtTtanOE5RY8jvA");
+                    await quickbloxClient.AuthenticationClient.CreateSessionBaseAsync();
+                    await QuickbloxClient.UsersClient.SignUpUserAsync(userSignUpRequest);
+                    var login = await QuickbloxClient.AuthenticationClient.ByLoginAsync(email, pass);
                     var fPage = new FirstPage();
                     await Navigation.PushModalAsync(fPage);
                 }

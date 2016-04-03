@@ -39,3 +39,5 @@ C:\Xam.dr\Xam.NavDrawer-master\Holo (Pre-Lollipop Style)\Xamarin.Forms\obj\Debug
 C:\Xam.dr\Xam.NavDrawer-master\Holo (Pre-Lollipop Style)\Xamarin.Forms\obj\Debug\uploadflags.txt
 C:\Xam.dr\Xam.NavDrawer-master\Holo (Pre-Lollipop Style)\Xamarin.Forms\bin\Debug\Parse.dll
 C:\Xam.dr\Xam.NavDrawer-master\Holo (Pre-Lollipop Style)\Xamarin.Forms\bin\Debug\Parse.xml
+C:\Xam.dr\Xam.NavDrawer-master\Holo\Xamarin.Forms\obj\Debug\NavDrawer.Forms.csprojResolveAssemblyReference.cache
+C:\Xam.dr\Xam.NavDrawer-master\Holo\Xamarin.Forms\obj\Debug\NavDrawer.Forms.csproj.App.config

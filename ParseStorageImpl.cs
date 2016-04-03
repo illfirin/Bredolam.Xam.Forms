@@ -36,11 +36,11 @@ namespace NavDrawer.Forms
     {
         static mobackStorageImpl impl = new mobackStorageImpl();
         public static mobackStorageImpl Default { get { return impl; } }
+        mobackClient localClient = new mobackClient(ApplicationKeyId: "YTRkZDRjZTUtMDVhMi00NTZkLWFhMjUtMWRlNTc1YzFlYmIx", DevelopmentKey: "YTVlZDE3NWQtZGZmMS00MmE2LWJiODMtYTIxOTZlMTViZjA2", baseurl: "https://api.moback.com");
         public List<Item> Items { get; private set; }
         protected mobackStorageImpl()
         {
             Items = new List<Item>();
-            var quickBloxClient = new QuickbloxClient(34572, "KG2EDJbme8Ah-Ux", "NtTtanOE5RY8jvA");
         }
 
         mobackObject TomobackObject(Item item)
@@ -73,8 +73,8 @@ namespace NavDrawer.Forms
         async public Task<List<Item>> RefreshDataAsync()
         {
            // var query = ParseObject.GetQuery("Citate").OrderBy("Name");
-            mobackObject[] obj = .GetObjectsWithQuery();
-            var ie = await query.FindAsync();
+            mobackObject[] obj = localClient.GetObjectsWithQuery("Citates", new { CitateName = "Name" };
+            var ie = await obj.FindAsync();
             
             var items = new List<Item>();
             foreach (var t in ie)

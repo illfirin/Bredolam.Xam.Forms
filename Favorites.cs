@@ -5,7 +5,7 @@ using Xamarin.Forms;
 using System.Net.WebClient;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Parse;
+using moback;
 using Android.App;
 using System.Net;
 using System.Collections.Generic;
@@ -16,7 +16,7 @@ namespace NavDrawer.Forms
     {
         public Favorites()
         {
-            ParseUser user = ParseUser.CurrentUser;
+            var CurrUser = mobackUser.;
             Collection<Item> favorites = (System.Collections.ObjectModel.Collection<NavDrawer.Forms.Item>)user["Favorites"];
             TextCell[] _text = new TextCell[0];
             for(int i = 0;  i < _text.Length; i++ )
