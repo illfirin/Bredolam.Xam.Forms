@@ -102,7 +102,7 @@ namespace NavDrawer.Forms
                 case MenuOption.Exit:
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        var result = await this.DisplayAlert("Alert!", "Do you really want to exit?", "Yes", "No");
+                        var result = await this.DisplayAlert("Alert!", "Do you really want to exist?", "Yes", "No");
                         if (result) Android.OS.Process.KillProcess(Android.OS.Process.MyPid());  
                     });
                     break;

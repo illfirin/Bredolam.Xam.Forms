@@ -5,6 +5,7 @@ namespace NavDrawer.Forms
 {
 	public static class Colors
 	{
+        public static int userIds = 0;
 		public static string Esmeralda_eyes = "#2BB173";
 		public static string LightGreen = "#37CCAE";
 		public static string Wired = "#6487a1";

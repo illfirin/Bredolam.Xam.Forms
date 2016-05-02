@@ -1,5 +1,5 @@
 ﻿using System;
-using Parse;
+
 using Xamarin.Forms.Platform.Android;
 using Android.Content.PM;
 using Android.App;
@@ -16,7 +16,7 @@ namespace NavDrawer.Forms
     {
 
 		public static MainActivity Current { get; private set; }
-		public NavDrawer.Forms.ParseStorageImpl TaskMgr { get; set; }
+		public NavDrawer.Forms.mobackStorageImpl TaskMgr { get; set; }
 
 		public MainActivity(IntPtr handle, global::Android.Runtime.JniHandleOwnership transfer)
 				: base() 
@@ -27,7 +27,7 @@ namespace NavDrawer.Forms
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate (bundle);
-			TaskMgr = ParseStorageImpl.Default;
+			TaskMgr = mobackStorageImpl.Default;
 			Xamarin.Forms.Forms.Init(this, bundle);
 			LoadApplication(new Appl());
 		}

@@ -16,7 +16,7 @@ namespace NavDrawer.Forms
     {
         public Favorites()
         {
-            var CurrUser = mobackUser.;
+           /*var CurrUser = appUSer.;
             Collection<Item> favorites = (System.Collections.ObjectModel.Collection<NavDrawer.Forms.Item>)user["Favorites"];
             TextCell[] _text = new TextCell[0];
             for(int i = 0;  i < _text.Length; i++ )
@@ -26,7 +26,7 @@ namespace NavDrawer.Forms
                     _text[i].Text = f.Name;
                     _text[i].Detail = f.Content;
                 }
-            }
+            }*/
 
         }
 

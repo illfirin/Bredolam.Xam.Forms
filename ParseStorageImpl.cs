@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace NavDrawer.Forms
 {
+   
     public class Item
     {
         public Item()
@@ -22,7 +23,7 @@ namespace NavDrawer.Forms
         public int rating { get; set; }
 
         public List<string> tags { get; set; }
-        public List<> Added { get; set; }
+        public List<mobackUser> Added { get; set; }
     }
 
     public interface IParseStorage
@@ -66,42 +67,42 @@ namespace NavDrawer.Forms
             i.Name = Convert.ToString(po["Name"]);
             i.tags = (List<string>)po["Tags"];
             i.Content = Convert.ToString(po["Content"]);
-            i.Added = (List<mobackObject>)po["Added"];
+            i.Added = (List<mobackUser>)po["Added"];
             return i;
         }
 
         async public Task<List<Item>> RefreshDataAsync()
         {
            // var query = ParseObject.GetQuery("Citate").OrderBy("Name");
-            mobackObject[] obj = localClient.GetObjectsWithQuery("Citates", new { CitateName = "Name" };
-            var ie = await obj.FindAsync();
+            mobackObject[] obj = localClient.GetObjectsWithQuery("Citates", new { CitateName = "Name" });
+            //var ie = await obj.FindAsync();
             
             var items = new List<Item>();
-            foreach (var t in ie)
+            /*foreach (var t in ie)
             {
                 items.Add(FromParseObject(t));
             }
 
-            return items;
+            return items;*/
         }
 
         public async Task SaveItemAsync(Item item)
         {
-            await ToParseObject(item).SaveAsync();
+            //await ToParseObject(item).SaveAsync();
         }
 
         public async Task<Item> GetItemAsync(string id)
         {
-            var query = ParseObject.GetQuery("Citate").WhereEqualTo("objectId", id);
-            var t = await query.FirstAsync();
-            return FromParseObject(t);
+           // var query = ParseObject.GetQuery("Citate").WhereEqualTo("objectId", id);
+           // var t = await query.FirstAsync();
+           // return FromParseObject(t);
             
         }
         public async Task DeleteItemAsync(Item item)
         {
             try
             {
-                await ToParseObject(item).DeleteAsync();
+              //  await ToParseObject(item).DeleteAsync();
             }
             catch(Exception ex)
             {
