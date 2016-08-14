@@ -43,7 +43,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="moback">
-      <HintPath>..\..\..\..\Users\Максим\Desktop\moback.dll</HintPath>
+      <HintPath>..\..\..\Desktop\moback.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -96,6 +96,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddNew.cs" />
     <Compile Include="CitateCell.cs" />
     <Compile Include="CitatePage.cs" />
     <Compile Include="Favorites.cs" />

@@ -145,6 +145,7 @@ namespace NavDrawer.Forms
 			{
 				try
 		        {
+                    
                      SignUpUser(userName.Text, email.Text, pass.Text);
 					
 				}
