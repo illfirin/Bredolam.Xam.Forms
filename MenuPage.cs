@@ -11,6 +11,7 @@ namespace NavDrawer.Forms
 		private readonly MasterDetailPage master;
 		private NavigationPage home;
 		private NavigationPage addNew;
+        private NavigationPage search;
 		private NavigationPage profile;
         private NavigationPage Favorites;
         private NavigationPage Settings;
@@ -26,7 +27,7 @@ namespace NavDrawer.Forms
             Items.Add(new MenuItem { Title = "Избранное", Option = MenuOption.Favorites });
             Items.Add(new MenuItem { Title = "Настройки", Option = MenuOption.Settings });
             Items.Add(new MenuItem { Title = "Выход", Option = MenuOption.Exit });
-
+            Items.Add(new MenuItem { Title = "Поиск цитаты", Option = MenuOption.Search});
             master = masterDetail;
 
 			Title = "menu";
@@ -60,6 +61,9 @@ namespace NavDrawer.Forms
 
             switch (item)
             {
+                case MenuOption.Search:
+                    master.Detail = search ??
+                        (search = new NavigationPage());
                 case MenuOption.Home:
                     master.Detail = home ??
                     (home = new NavigationPage(

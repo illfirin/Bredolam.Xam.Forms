@@ -23,7 +23,7 @@ namespace NavDrawer.Forms
         public int rating { get; set; }
 
         public List<string> tags { get; set; }
-        public List<mobackUser> Added { get; set; }
+        //public List<mobackUser> Added { get; set; }
     }
 
     public interface IParseStorage
@@ -44,7 +44,7 @@ namespace NavDrawer.Forms
             Items = new List<Item>();
         }
 
-        mobackObject TomobackObject(Item item)
+        public mobackObject TomobackObject(Item item)
         {
             var po = new mobackObject("Citate");
             if (item.Id != 0)
@@ -55,10 +55,10 @@ namespace NavDrawer.Forms
             po["Rating"] = item.rating;
             po["Tags"] = item.tags;
             po["Content"] = item.Content;
-            po["Added"] = item.Added;
+           // po["Added"] = item.Added;
             return po;
         }
-        Item FrommobackObject(mobackObject po)
+        public Item FrommobackObject(mobackObject po)
         {
             var i = new Item();
             i.Id = Convert.ToInt32(po.objectId);
@@ -67,7 +67,7 @@ namespace NavDrawer.Forms
             i.Name = Convert.ToString(po["Name"]);
             i.tags = (List<string>)po["Tags"];
             i.Content = Convert.ToString(po["Content"]);
-            i.Added = (List<mobackUser>)po["Added"];
+           // i.Added = (List<mobackUser>)po["Added"];
             return i;
         }
 
@@ -109,6 +109,5 @@ namespace NavDrawer.Forms
                 Console.Error.WriteLine(@"Error{0}", ex.Message);
             }
         }
-    }
 }
 

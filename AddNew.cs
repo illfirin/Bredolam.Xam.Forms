@@ -28,33 +28,53 @@ namespace NavDrawer.Forms
 
             Button Save = new Button
             {
-                Text = "Save";
-            BackgroundColor = Colors.GetColor(Colors.Wired);
+                Text = "Save",
+                BackgroundColor = Colors.GetColor(Colors.Wired)
 
-        }
-        Save.Clicked += (senser, e) =>
+            };
+
+            Save.Clicked += (senser, e) =>
             {
-             
+
                 String[] tags = (tags.Text).Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-        resultObject ro = new resultObject();
-        mobackObject mObject = new mobackObject("Citate");
-        mObject["Author"] = autor.Text;
+                resultObject ro = new resultObject();
+                mobackObject mObject = new mobackObject("Citate");
+                mObject["Author"] = autor.Text;
                 mObject["Content"] = content.Text;
                 mObject["Name"] = name.Text;
                 mObject["tags"] = tags;
 
-                if(MainPage.HasConnection())
+                if (MainPage.HasConnection())
                 {
                     try
                     {
                         ro = localClient.UpdateObject(mObject);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Console.Error.WriteLine(@"Error{0}", ex.Message);
                     }
-               
-            }
+
+                }
+            };
+            this.Content = new StackLayout
+            {
+                Spacing = 20,
+                Padding = 50,
+                VerticalOptions = LayoutOptions.Center,
+                BackgroundColor = Colors.GetColor(Colors.LightGreen),
+                Children =
+                {
+                    Autor,
+                    autor,
+                    Name,
+                    name,
+                    Content,
+                    content,
+                    Tags,
+                    tags
+                }
+            };
         }
     }
 }
