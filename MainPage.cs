@@ -146,7 +146,7 @@ namespace NavDrawer.Forms
 				try
 		        {
                     
-                     SignUpUser(userName.Text, email.Text, pass.Text);
+                    await SignUpUser(userName.Text, email.Text, pass.Text);
 					
 				}
 				catch(Exception ex)

@@ -45,7 +45,7 @@ namespace NavDrawer.Forms
                 };
             lWeek.Clicked += (sender, e) =>
                 {
-                    mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new { createdAt = (System. =DateTime.) });
+                    mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new { createdAt = DateTime.Now) });
                     List<CitateCell> cit = new List<CitateCell>();
                     List<Item> it = new List<Item>();
                     foreach (var b in obj)

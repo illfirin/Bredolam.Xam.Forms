@@ -58,7 +58,7 @@ namespace NavDrawer.Forms
            // po["Added"] = item.Added;
             return po;
         }
-        public Item FrommobackObject(mobackObject po)
+        public static Item FrommobackObject(mobackObject po)
         {
             var i = new Item();
             i.Id = Convert.ToInt32(po.objectId);
@@ -85,6 +85,21 @@ namespace NavDrawer.Forms
 
             return items;*/
         }
+        public async Task DeleteItemAsync(string name)
+        {
+            try
+            {
+                mobackObject[] mo = localClient.GetObjectsWithQuery("Citate", new { Name = name });
+                foreach (mobackObject mb in mo)
+                {
+                    localClient.DeleteObject(mb);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(@"Error{0}", ex.Message);
+            }
+        }
 
         public async Task SaveItemAsync(Item item)
         {
@@ -94,20 +109,6 @@ namespace NavDrawer.Forms
         
             
         }
-        public async Task DeleteItemAsync(string Name)
-        {
-            try
-            {
-                mobackObject[] mo = localClient.GetObjectWithQuery("Citate", new { Name = this.Name });
-                foreach(mobackObject mb in mo)
-                {
-                    localClient.DeleteObject(mb);
-                }
-            }
-            catch(Exception ex)
-            {
-                Console.Error.WriteLine(@"Error{0}", ex.Message);
-            }
-        }
+       
 }
 

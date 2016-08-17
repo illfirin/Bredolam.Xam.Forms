@@ -67,46 +67,46 @@ namespace NavDrawer.Forms
                 case MenuOption.Home:
                     master.Detail = home ??
                     (home = new NavigationPage(
-                        new ContentPage
+                       /* new ContentPage
                         {
                             Title = "Home",
-                            Content = new Label { Text = "Home", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
-                        })
+                            Content = new Label { Text = "Home", FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
+                        }*/)
                     );
                     break;
                 case MenuOption.Profile:
                     master.Detail = profile ??
                     (profile = new NavigationPage(
-                        new ContentPage
+                        /*new ContentPage
                         {
                             Title = "Profile",
-                            Content = new Label { Text = "Profile", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
-                        })
+                            Content = new Label { Text = "Profile", FontSize = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
+                        }*/)
                     );
                     break;
                 case MenuOption.Add_new:
                     master.Detail = addNew ??
                     (addNew = new NavigationPage(
-                        new ContentPage
+                        /*new ContentPage
                         {
                             Title = "Add New",
                             Content = new Label { Text = "Add new", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
-                        })
+                        }*/)
                     );
                     break;
                 case MenuOption.Favorites:
                     master.Detail = Favorites ??
                         (Favorites = new NavigationPage(
-                            new ContentPage
+                           /* new ContentPage
                             {
                                 Title = "Favotites",
                                 Content = new Label { Text = "Favorites", Font = Font.SystemFontOfSize(40), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
-                            }));
+                            }*/));
                     break;
                 case MenuOption.Exit:
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                        var result = await this.DisplayAlert("Alert!", "Do you really want to exist?", "Yes", "No");
+                        var result = await this.DisplayAlert("Alert!", "Do you really want to exit?", "Yes", "No");
                         if (result) Android.OS.Process.KillProcess(Android.OS.Process.MyPid());  
                     });
                     break;
