@@ -67,11 +67,7 @@ namespace NavDrawer.Forms
                 case MenuOption.Home:
                     master.Detail = home ??
                     (home = new NavigationPage(
-                       /* new ContentPage
-                        {
-                            Title = "Home",
-                            Content = new Label { Text = "Home", FontSize = Device.GetNamedSize(NamedSize.Medium, typeof(Label)), VerticalOptions = LayoutOptions.Center, HorizontalOptions = LayoutOptions.Center }
-                        }*/)
+                       new NavDrawer(
                     );
                     break;
                 case MenuOption.Profile:
