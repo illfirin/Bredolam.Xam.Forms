@@ -63,16 +63,16 @@ namespace NavDrawer.Forms
             {
                 case MenuOption.Search:
                     master.Detail = search ??
-                        (search = new NavigationPage());
+                        (search = new searchPage());
                 case MenuOption.Home:
                     master.Detail = home ??
                     (home = new NavigationPage(
-                       new NavDrawer(
+                       new FirstPage()
                     );
                     break;
                 case MenuOption.Profile:
                     master.Detail = profile ??
-                    (profile = new NavigationPage(
+                    (profile = new NavigationPage( new 
                         /*new ContentPage
                         {
                             Title = "Profile",

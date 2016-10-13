@@ -45,7 +45,7 @@ namespace NavDrawer.Forms
                 };
             lWeek.Clicked += (sender, e) =>
                 {
-                    mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new { createdAt = DateTime.Now) });
+                    mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new { createdAt = System.DateTime.Now) });
                     List<CitateCell> cit = new List<CitateCell>();
                     List<Item> it = new List<Item>();
                     foreach (var b in obj)
@@ -58,6 +58,24 @@ namespace NavDrawer.Forms
                         layout.Children.Add(c);
                     }
                 };
+            lmonth.Clicked += (sender, e) =>
+            {
+                mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new {createdAt = })
+                List<CitateCell> cit = new List<CitateCell>();
+                List<Item> citates = new List<Item>();
+
+                foreach(var b in obj)
+                {
+                    citates.Add(it.Add(mobackStorageImpl.Frommobackobj(b)));
+                }
+
+                foreach(var c in citate)
+                {
+                    layout.Children.Add(c);
+                }
+            }
+
+            
 
 
     }

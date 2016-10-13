@@ -105,10 +105,34 @@ namespace NavDrawer.Forms
         {
             //await ToParseObject(item).SaveAsync();
         }
+        public async Task RefreshUserData(moback.mobackUser user)
+        {
+            //Connection to moback, creation of new object that will be sent
+            moback.mobackObject userObj = new moback.mobackObject(user[user.Name]);
+            userObj[userObj.userId] = userObj.userId;
+            userObj["Name"] = user.Name;
+            appUSer appuser = new appUSer();
+            appuser.userId = user.Id;
 
-        
-            
+            //Updating user data
+            appuser.password = user.password;
+            try
+            {
+                var vsessionToken = mu.Login(appuser);
+                resultObject ro = new resultObject();
+                ro = mu.userUpdate(userObj, vsessionToken.ssotoken);
+            }
+
+            catch(exception ex)
+            {
+
+            }
+
         }
-       
+        
+
+            
+
+        }
 }
 
