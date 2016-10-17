@@ -37,9 +37,13 @@ namespace NavDrawer.Forms
         }
         async Task<List<Item>> GetSearchedArray(string str)
         {
+            //searched pattern
+
             string pattern = @"\b(\w+)\s\1\b";
             Regex reg = new Regex(pattern, RegexOptions.IgnoreCase);
 
+            //get objects, that match the pattern
+            
             return await Task.Run(() =>
             {
             List<Item> l = new List<Item>)();
