@@ -18,9 +18,10 @@ namespace NavDrawer.Forms
 {
     public class Search: ContentPage
     {
-        public Search()
+        public Search(string s)
         {
             Entry request = new Entry();
+            StackLayout layout = new StackLayout();
             Button beginSearch = new Button
             {
                 Text = "Search";
@@ -29,7 +30,8 @@ namespace NavDrawer.Forms
 
             beginSearch.Clicked +=  (sender, e) =>
             {
-
+                List<Item> searchedCitations = GetSearchedArray(s);
+                
             };
 
 

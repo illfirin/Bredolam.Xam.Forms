@@ -12,20 +12,30 @@ namespace NavDrawer.Forms
     {
         public FirstPage()
         {
+            Entry _search = new Entry { Placeholder = "Enter your request here"};
             var layout = new StackLayout();
             Button lDay = new Button
             {
-
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Text = "Show citations for the last day",
+                BackgroundColor = Colors.GetColor(Colors.Esmeralda_eyes)
             };
 
             Button lWeek = new Button
             {
-
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Text = "Show citations for the last week",
+                BackgroundColor = Colors.GetColor(Colors.Esmeralda_eyes)
             };
 
             Button lmonth = new Button
             {
-
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                Text = "Show citations for the last month",
+                BackgroundColor = Colors.GetColor(Colors.Esmeralda_eyes)
             };
 
             lDay.Clicked += (sender, e) =>
@@ -45,7 +55,8 @@ namespace NavDrawer.Forms
                 };
             lWeek.Clicked += (sender, e) =>
                 {
-                    mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new { createdAt = System.DateTime.Now) });
+                    //get list of citations with LINQ
+                    mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new  cit.Where(t => createdAt >= DateTime.Now.AddDays(-7) ));
                     List<CitateCell> cit = new List<CitateCell>();
                     List<Item> it = new List<Item>();
                     foreach (var b in obj)
@@ -55,12 +66,13 @@ namespace NavDrawer.Forms
                     }
                     foreach (var c in cit)
                     {
+                        //add citations
                         layout.Children.Add(c);
                     }
                 };
             lmonth.Clicked += (sender, e) =>
             {
-                mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new {createdAt = })
+                mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new cit.Where(t => createdAt >= DateTime.Now.AddMonth(-1)));
                 List<CitateCell> cit = new List<CitateCell>();
                 List<Item> citates = new List<Item>();
 
@@ -71,6 +83,7 @@ namespace NavDrawer.Forms
 
                 foreach(var c in citate)
                 {
+                
                     layout.Children.Add(c);
                 }
             }
@@ -82,10 +95,13 @@ namespace NavDrawer.Forms
                 VerticalOptions = LayoutOptions.FillAndExpand,
                 Children = 
                 {
-                    
-                }
+                    _search,
+                    lDay,
+                    lWeek,
+                    lmonth
+                };
                 
-            }
+            };
 
             
 
