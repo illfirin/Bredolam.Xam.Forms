@@ -23,7 +23,7 @@ namespace NavDrawer.Forms
         public int rating { get; set; }
 
         public List<string> tags { get; set; }
-        //public List<mobackUser> Added { get; set; }
+        public List<mobackUser> Added { get; set; }
     }
 
     public interface IParseStorage
@@ -55,7 +55,7 @@ namespace NavDrawer.Forms
             po["Rating"] = item.rating;
             po["Tags"] = item.tags;
             po["Content"] = item.Content;
-           // po["Added"] = item.Added;
+            po["Added"] = item.Added;
             return po;
         }
         public static Item FrommobackObject(mobackObject po)
@@ -67,20 +67,22 @@ namespace NavDrawer.Forms
             i.Name = Convert.ToString(po["Name"]);
             i.tags = (List<string>)po["Tags"];
             i.Content = Convert.ToString(po["Content"]);
-           // i.Added = (List<mobackUser>)po["Added"];
+            i.Added = (List<mobackUser>)po["Added"];
             return i;
         }
 
-        async public Task<List<Item>> RefreshDataAsync()
+        async public Task<List<Item>> RefreshDataAsync(Item item)
         {
            // var query = ParseObject.GetQuery("Citate").OrderBy("Name");
-            mobackObject[] obj = localClient.GetObjectsWithQuery("Citates", new { CitateName = "Name" });
+            mobackObject[] obj = localClient.GetObjectsWithQuery("Citate", new { CitateName = "Name" });
             //var ie = await obj.FindAsync();
-            
-            var items = new List<Item>();
-            /*foreach (var t in ie)
+            resultObject ro = new resultObject();
+            /*mobackObject newObject = new mobackObject("Employees");
+            newObject["Citate"] = "NewName"
+            var items = new List<Item>();*/
+            foreach (var t in obj)
             {
-                items.Add(FromParseObject(t));
+                ro = localClient.UpdateObject(obj));
             }
 
             return items;*/
@@ -128,6 +130,17 @@ namespace NavDrawer.Forms
 
             }
 
+        }
+
+        public static T RefreshContent(string txt, string colour)
+        {
+            //creating new generic exemplar and write data into it
+            T cont = new T();
+            cont.Text = txt;
+            cont.BackgroundColor = colour;
+            
+            return cont;
+        
         }
         
 

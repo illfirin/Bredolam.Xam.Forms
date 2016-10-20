@@ -75,6 +75,18 @@ namespace NavDrawer.Forms
                 }
             }
 
+            this.Content = new StackLayout
+            {
+                BackgroundColor = Color.FromHex("#ECE5CE"),
+                Spacing = 0,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                Children = 
+                {
+                    
+                }
+                
+            }
+
             
 
 

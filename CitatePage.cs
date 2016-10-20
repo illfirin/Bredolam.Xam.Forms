@@ -11,6 +11,7 @@ namespace NavDrawer.Forms
     {
         public CitatePage(Item item)
         {
+            //Is citation rate added by user?
             bool _added = false;
             Label title = new Label();
             title.Text = item.Name;
@@ -47,7 +48,7 @@ namespace NavDrawer.Forms
                     if(_added != true)
                     {
                         item.rating += 1;
-                        item.Added.Add(ParseUser.CurrentUser);
+                        item.Added.Add();
                         addRate.TextColor = Color.FromHex(Colors.Wired);
                         _added = true;
                     }

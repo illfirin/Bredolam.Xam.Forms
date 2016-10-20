@@ -15,9 +15,9 @@ namespace NavDrawer.Forms
     public class Favorites:NavigationPage
     {
         public Favorites()
-        {
-           /*var CurrUser = appUSer.;
-            Collection<Item> favorites = (System.Collections.ObjectModel.Collection<NavDrawer.Forms.Item>)user["Favorites"];
+        {/*
+            var CurrUser = appUSer.;
+            Collection<Item> favorites = (System.Collections.ObjectModel.Collection<NavDrawer.Forms.Item>)mobackUSer["Favorites"];
             TextCell[] _text = new TextCell[0];
             for(int i = 0;  i < _text.Length; i++ )
             {

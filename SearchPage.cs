@@ -23,7 +23,7 @@ namespace NavDrawer.Forms
             Entry request = new Entry();
             Button beginSearch = new Button
             {
-
+                Text = "Search";
             };
 
 
